@@ -1,0 +1,72 @@
+﻿﻿<!DOCTYPE html>
+<!-- include A-Frame -->
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!-- include AR.js -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+<script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+
+<body style="margin : 0px; overflow: hidden;">
+  <!-- adding scene with a-frame, with gesture-detector, & in detection mode with barcode, the barcode from https://github.com/nicolocarpignoli/artoolkit-barcode-markers-collection -->
+  <a-scene
+    embedded
+    arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    gesture-detector
+  >
+    <!-- adding 3D Objects assets -->
+    <a-assets>
+      <a-asset-item id="Lingga-Object" src="assets/Lingga.glb"></a-asset-item>
+      <a-asset-item id="Peripih-Object" src="assets/Peripih.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- define AR camera to type of marker -->
+    <a-marker type="barcode" value="0">
+      <!-- 3D object entity -->
+      <a-entity
+        id="bowser-model-lingga"
+        scale="0.14311503350619903 0.14311503350619903 0.14311503350619903"
+        animation-mixer="loop: repeat"
+        gltf-model="#Lingga-Object"
+        class="clickable"
+        gesture-handler
+      ></a-entity>
+
+      <!-- Name object entity -->
+      <a-entity
+        position="0.75 1.5 0"
+        text="width: 2; color: white; wrapCount: 20; value: Lingga"
+      ></a-entity>
+      <!-- Description object entity -->
+      <a-entity
+        position="-1.5 0 0"
+        text="width: 2; color: white; wrapCount: 20; value: Pada zaman dulu berfungsi sebagai patok batas wilayah daerah"
+      ></a-entity>
+    </a-marker>
+
+    <a-marker type="barcode" value="5">
+      <a-entity
+        id="bowser-model-peripih"
+        position="0 0.3 1"
+        scale="0.3 0.3 0.3"
+        animation-mixer="loop: repeat"
+        gltf-model="#Peripih-Object"
+        class="clickable"
+        gesture-handler
+      ></a-entity>
+
+      <a-entity
+        position="0.75 1.5 0"
+        text="width: 2; color: white; wrapCount: 20; value: Peripih"
+      ></a-entity>
+      <a-entity
+        position="-1.5 0 0"
+        text="width: 2; color: white; wrapCount: 20; value: Salah satu alat ritual keagamaan"
+      ></a-entity>
+    </a-marker>
+
+    <!-- Add AR camera -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
